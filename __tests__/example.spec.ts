@@ -14,7 +14,7 @@ test('Наличие формы авторизацие', async ({ page }) => {
   await page.getByRole('button', { name: 'Sign in' }).click();
 
   // Expects page to have a heading with the name of Installation.
-  await expect(page.locator('.MuiPaper-root')).toBeVisible();
+  await expect(page.locator('.RaLogin-card')).toBeVisible();
 });
 
 
