@@ -1,0 +1,2 @@
+### Hexlet tests and linter status:
+[![Actions Status](https://github.com/dragin96/testing-kanban-project-90/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/dragin96/testing-kanban-project-90/actions)
