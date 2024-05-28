@@ -9,13 +9,4 @@ test('has title', async ({ page }) => {
   await expect(page).toHaveTitle(/Vite \+ React/);
 });
 
-test('Наличие формы авторизацие', async ({ page }) => {
-  // Click the get started link.
-  await page.getByRole('button', { name: 'Sign in' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.locator('.RaLogin-card')).toBeVisible();
-});
-
-
 

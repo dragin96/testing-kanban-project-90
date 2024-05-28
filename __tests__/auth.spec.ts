@@ -1,17 +1,5 @@
-import {expect, test} from "@playwright/test";
-
-
-test.beforeEach(async ({page})=> {
-    const authData = {
-        login: 'nickname',
-        password: 'password'
-    }
-
-    await page.goto('http://localhost:5173/');
-    await page.getByLabel('username').fill(authData.login);
-    await page.getByLabel('password').fill(authData.password);
-    await page.getByRole('button', { name: 'Sign in' }).click();
-});
+import {expect} from "@playwright/test";
+import {test} from "../helpers/fixtures/auth";
 
 test('Авторизация', async ({page}) => {
     await expect(page.getByLabel('Profile')).toBeVisible();
