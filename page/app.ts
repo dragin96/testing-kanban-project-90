@@ -5,6 +5,8 @@ import {Page} from "@playwright/test";
 import {ListUsersPage} from "./users/listUsers.page";
 import {ListLabelsPage} from "./labels/listLabel.page";
 import {FormLabelPage} from "./labels/formLabel.page";
+import {ListStatusPage} from "./statuses/listStatus.page";
+import {FormStatusPage} from "./statuses/formStatus.page";
 
 export class App extends PageHolder {
     constructor(page: Page) {
@@ -16,4 +18,6 @@ export class App extends PageHolder {
     listLabels = new ListLabelsPage(this.page);
     formLabelPage = new FormLabelPage(this.page);
 
+    listStatuses = new ListStatusPage(this.page);
+    formStatusPage = new FormStatusPage(this.page);
 }

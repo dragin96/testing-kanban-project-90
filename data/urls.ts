@@ -7,5 +7,9 @@ export const urls = {
     labels: {
         list: '/#/labels',
         create: '/#/labels/create'
+    },
+    statuses: {
+        list: '/#/task_statuses',
+        create: '/#/task_statuses/create'
     }
 } as const;
