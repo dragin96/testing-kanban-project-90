@@ -48,7 +48,7 @@ test.describe('Редактирование и удаление пользова
 
    });
 
-   test('Успешное редактирование пользователя', async ({page, app: {formUserPage, listUsers}}) => {
+   test('Успешное редактирование пользователя', async ({app: {formUserPage, listUsers}}) => {
       const newUsersTestData: Partial<Users> = {
          firstName: faker.person.firstName('female'),
          lastName: faker.person.lastName('female'),
