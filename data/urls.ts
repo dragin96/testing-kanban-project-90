@@ -11,5 +11,10 @@ export const urls = {
     statuses: {
         list: '/#/task_statuses',
         create: '/#/task_statuses/create'
+    },
+    tasks: {
+        board: '/#/tasks',
+        create: '/#/tasks/create',
+        items: (id: number) => '/#/tasks/' + id
     }
 } as const;

@@ -1,24 +1,14 @@
 import {BasePage} from "../base/base.page";
 import {Page} from "@playwright/test";
 import {urls} from "../../data/urls";
-import {TableComponent} from "../../components/table.component";
+import {BaseListPage} from "../base/baseList.page";
 
-export class ListUsersPage extends BasePage {
+export class ListUsersPage extends BaseListPage {
     url = urls.users.list;
     constructor(page: Page) {
-        super(page);
+        super({
+            columns: ['Id', 'Email', 'First name', 'Last name', 'Created at'],
+            page: page
+        });
     }
-
-    private buttonCreateUsers = this.page.getByLabel('Create', { exact: true });
-
-    public table = new TableComponent({
-        page: this.page,
-        locator: this.page.locator('table'),
-        columns: ['Id', 'Email', 'First name', 'Last name', 'Created at'],
-    });
-
-    async clickCreateUsers(){
-        await this.buttonCreateUsers.click();
-    }
-
 }

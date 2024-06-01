@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@hexlet/testing-task-manager": "^0.1.1",
+    "@typescript-eslint/parser": "^6.21.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

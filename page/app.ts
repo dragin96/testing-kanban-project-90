@@ -7,6 +7,9 @@ import {ListLabelsPage} from "./labels/listLabel.page";
 import {FormLabelPage} from "./labels/formLabel.page";
 import {ListStatusPage} from "./statuses/listStatus.page";
 import {FormStatusPage} from "./statuses/formStatus.page";
+import {FormTasksPage} from "./tasks/formTasks.page";
+import {BoardPage} from "./tasks/board.page";
+import {TaskPage} from "./tasks/task.page";
 
 export class App extends PageHolder {
     constructor(page: Page) {
@@ -20,4 +23,8 @@ export class App extends PageHolder {
 
     listStatuses = new ListStatusPage(this.page);
     formStatusPage = new FormStatusPage(this.page);
+
+    formTasksPage = new FormTasksPage(this.page);
+    boardPage = new BoardPage(this.page);
+    taskPage = new TaskPage(this.page);
 }

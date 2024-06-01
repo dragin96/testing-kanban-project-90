@@ -3,6 +3,7 @@ import {urls} from "../data/urls";
 import {NoticeMessages} from "../components/noticeMessages.component";
 import {generateLabels, Labels} from "../data/labels";
 import {TableActions} from "../components/table.component";
+import {EmptyElements} from "../data/emptyElements";
 
 let newLabels: Labels;
 
@@ -19,7 +20,7 @@ test.describe('Форма создания нового label', ()=> {
    test('Успешное создание нового label', async ({app: {formLabelPage}}) => {
       const formValue: Labels = generateLabels();
 
-      await formLabelPage.fillForm(formValue);
+      await formLabelPage.fillForm<Labels>(formValue);
       await formLabelPage.save();
 
       await formLabelPage.messages.expectMessages(NoticeMessages.created);
@@ -31,8 +32,8 @@ test.describe('Редактирование и удаление labels', async (
    test.beforeEach(async ({app: {listLabels, formLabelPage}})=> {
       newLabels = generateLabels();
       await listLabels.open();
-      await listLabels.clickCreateLabel();
-      await formLabelPage.fillForm(newLabels);
+      await listLabels.clickCreate();
+      await formLabelPage.fillForm<Labels>(newLabels);
       await formLabelPage.save();
       await formLabelPage.messages.expectMessages(NoticeMessages.created);
 
@@ -44,7 +45,7 @@ test.describe('Редактирование и удаление labels', async (
    test('Успешное редактирование label', async ({app: {formLabelPage, listLabels}}) => {
       const newLabelsTestData = generateLabels();
       await formLabelPage.checkAllForm();
-      await formLabelPage.fillForm(newLabelsTestData);
+      await formLabelPage.fillForm<Labels>(newLabelsTestData);
       await formLabelPage.save();
 
       await formLabelPage.messages.expectMessages(NoticeMessages.updated);
@@ -67,6 +68,6 @@ test.describe('Редактирование и удаление labels', async (
       await listLabels.table.clickActions(TableActions.delete);
       await formLabelPage.messages.expectMessages(NoticeMessages.multiDeleted);
 
-      await expect(page.getByText('No Label yet.')).toBeVisible();
+      await expect(page.getByText(EmptyElements.labels)).toBeVisible();
    });
 });

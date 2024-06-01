@@ -23,10 +23,10 @@ export abstract class BaseComponent extends PageHolder {
 }
 
 export abstract class BasePage extends PageHolder{
-    abstract url: string
+    url?: string
 
-    async open(){
-        await this.page.goto(this.url)
+    async open(url?: string){
+        await this.page.goto(this.url ?? url);
     }
 }
 

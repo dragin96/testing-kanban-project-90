@@ -4,6 +4,7 @@ import {urls} from "../data/urls";
 import {NoticeMessages} from "../components/noticeMessages.component";
 import {generateTestUsers, Users} from "../data/users";
 import {TableActions} from "../components/table.component";
+import {EmptyElements} from "../data/emptyElements";
 
 let newUsers: Users;
 
@@ -25,7 +26,7 @@ test.describe('Форма создания нового пользователя
          password: faker.word.words(5)
       }
 
-      await formUserPage.fillForm(formValue);
+      await formUserPage.fillForm<Users>(formValue);
       await formUserPage.save();
 
       await formUserPage.messages.expectMessages(NoticeMessages.created);
@@ -34,11 +35,11 @@ test.describe('Форма создания нового пользователя
 
 
 test.describe('Редактирование и удаление пользователей', async () => {
-   test.beforeEach(async ({page, app: {listUsers, formUserPage}})=> {
+   test.beforeEach(async ({app: {listUsers, formUserPage}})=> {
       newUsers = generateTestUsers();
       await listUsers.open();
-      await listUsers.clickCreateUsers();
-      await formUserPage.fillForm(newUsers);
+      await listUsers.clickCreate();
+      await formUserPage.fillForm<Users>(newUsers);
       await formUserPage.save();
       await formUserPage.messages.expectMessages(NoticeMessages.created);
 
@@ -48,12 +49,12 @@ test.describe('Редактирование и удаление пользова
    });
 
    test('Успешное редактирование пользователя', async ({page, app: {formUserPage, listUsers}}) => {
-      const newUsersTestData = {
+      const newUsersTestData: Partial<Users> = {
          firstName: faker.person.firstName('female'),
          lastName: faker.person.lastName('female'),
       }
       await formUserPage.checkAllForm();
-      await formUserPage.fillForm(newUsersTestData);
+      await formUserPage.fillForm<Partial<Users>>(newUsersTestData);
       await formUserPage.save();
 
       await formUserPage.messages.expectMessages(NoticeMessages.updated);
@@ -61,7 +62,7 @@ test.describe('Редактирование и удаление пользова
       await listUsers.table.expectDataRow(newUsersTestData, { isExist: true });
    });
 
-   test('Успешное удаление пользователей', async ({page, app: {formUserPage, listUsers}}) => {
+   test('Успешное удаление пользователей', async ({app: {formUserPage, listUsers}}) => {
       await formUserPage.delete();
 
       await formUserPage.messages.expectMessages(NoticeMessages.deleted);
@@ -76,6 +77,6 @@ test.describe('Редактирование и удаление пользова
       await listUsers.table.clickActions(TableActions.delete);
       await formUserPage.messages.expectMessages(NoticeMessages.multiDeleted);
 
-      await expect(page.getByText('No User yet.')).toBeVisible();
+      await expect(page.getByText(EmptyElements.users)).toBeVisible();
    });
 });
