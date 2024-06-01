@@ -1,10 +1,12 @@
 import {BasePage} from "../base/base.page";
 import {expect, Page} from "@playwright/test";
-import {urls} from "../../data/urls";
 import {Filter} from "./components/Filters";
-import {NoticeMessagesComponent} from "../../components/noticeMessages.component";
-import {ColumnsBoard} from "../../data/columnsBoard";
+
 import {Cards} from "./components/Cards";
+import {NoticeMessagesComponent} from "../../components/noticeMessages.component";
+import {urls} from "../../data/urls";
+import {ColumnsBoard} from "../../data/columnsBoard";
+
 
 export class BoardPage extends BasePage {
     constructor(page: Page) {

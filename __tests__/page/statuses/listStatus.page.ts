@@ -1,6 +1,6 @@
 import {Page} from "@playwright/test";
-import {urls} from "../../data/urls";
 import {BaseListPage} from "../base/baseList.page";
+import { urls } from "../../data/urls";
 
 export class ListStatusPage extends BaseListPage {
     url = urls.statuses.list;

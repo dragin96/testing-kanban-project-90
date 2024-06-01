@@ -61,7 +61,7 @@ test.describe('Редактирование и удаление задачи', a
         await boardPage.messages.expectMessages(NoticeMessages.deleted);
         await card.expectDeleted();
     });
-    
+
     test('Перемещение задачи по доске', async ({page, app: {boardPage}}) => {
         const titleTask = 'Task 1';
         const targetStatus = ColumnsBoard.toPublish

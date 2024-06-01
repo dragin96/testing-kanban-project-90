@@ -1,7 +1,8 @@
 import {BaseFormPage} from "../base/baseForm.page";
 import {Page} from "@playwright/test";
-import {SelectComponent} from "../../components/select.component";
 import {InputComponent} from "../../components/input.component";
+import {SelectComponent} from "../../components/select.component";
+
 
 export class FormTasksPage extends BaseFormPage {
     constructor(page: Page) {

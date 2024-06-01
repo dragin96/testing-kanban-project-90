@@ -1,6 +1,6 @@
-import {BaseFormPage} from "../../base/baseForm.page";
-import {SelectComponent} from "../../../components/select.component";
 import {Page} from "@playwright/test";
+import {SelectComponent} from "../../../components/select.component";
+import {BaseFormPage} from "../../base/baseForm.page";
 
 export class Filter extends BaseFormPage {
     constructor(page: Page) {

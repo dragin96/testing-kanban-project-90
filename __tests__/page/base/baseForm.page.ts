@@ -1,8 +1,8 @@
 import {BasePage} from "./base.page";
 import {expect, Page} from "@playwright/test";
-import {NoticeMessagesComponent} from "../../components/noticeMessages.component";
-import {SelectComponent} from "../../components/select.component";
 import {InputComponent} from "../../components/input.component";
+import {SelectComponent} from "../../components/select.component";
+import {NoticeMessagesComponent} from "../../components/noticeMessages.component";
 
 export interface SettingsBaseForm {
     page: Page,

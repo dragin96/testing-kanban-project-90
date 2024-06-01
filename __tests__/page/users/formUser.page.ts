@@ -2,6 +2,7 @@ import {BaseFormPage} from "../base/baseForm.page";
 import {Page} from "@playwright/test";
 import {InputComponent} from "../../components/input.component";
 
+
 export class FormUserPage extends BaseFormPage {
     constructor(page: Page) {
         super({

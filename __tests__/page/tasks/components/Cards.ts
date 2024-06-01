@@ -1,5 +1,6 @@
-import {BaseComponent} from "../../base/base.page";
+
 import {expect, Page} from "@playwright/test";
+import {BaseComponent} from "../../base/base.page";
 
 export class Cards extends BaseComponent {
     static getCardByTitle(title: string, page: Page) {

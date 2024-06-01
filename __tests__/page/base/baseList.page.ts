@@ -1,6 +1,6 @@
 import {BasePage} from "./base.page";
-import {TableComponent} from "../../components/table.component";
 import {Page} from "@playwright/test";
+import {TableComponent} from "../../components/table.component";
 
 export interface SettingBaseListPage {
     page: Page,

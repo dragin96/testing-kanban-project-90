@@ -3,6 +3,7 @@ import {AuthPage} from "../../page/auth.page";
 import {validAuthData} from "../../data/users";
 import {App} from "../../page/app";
 
+
 export const authTest = base.extend({
     page: async ({ page }, use) => {
         const authPage = new AuthPage(page);
