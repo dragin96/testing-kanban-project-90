@@ -1,0 +1,15 @@
+stages:
+  - test
+
+tests:
+  stage: test
+  image: mcr.microsoft.com/playwright:v1.48.1-noble
+  script:
+    - npm ci
+    - npx playwright test
+
+  artifacts:
+    paths:
+      - playwright-report # Сохранение отчета Playwright как артефакт
+    when: always
+    expire_in: 1 day
