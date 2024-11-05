@@ -39,14 +39,10 @@ jobs:
           name: playwright-report
           path: playwright-report
 
-      # Добавляем отчет HTML как артефакт
-      - name: Generate HTML Report
-        if: always()
-        run: npx playwright show-report
 
-      - name: Upload HTML Report
-        if: always()
-        uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v3
+        if: ${{ !cancelled() }}
         with:
-          name: html-report
-          path: playwright-report
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
