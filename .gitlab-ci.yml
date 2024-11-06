@@ -7,8 +7,9 @@ tests:
   script:
     - npm ci
     - npx playwright test
-    - node reporter.js
 
+  after_script:
+    - node reporter.js
   artifacts:
     paths:
       - playwright-report
