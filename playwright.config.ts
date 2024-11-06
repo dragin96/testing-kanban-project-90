@@ -22,13 +22,14 @@ export default defineConfig({
   workers: process.env.CI ? 4 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
+    ['json', { outputFile: 'results.json' }],
+    ['html'],
     ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
       title: 'E2E тесты',
       useDetails: true,
       showError: true
     }],
-    ['json', { outputFile: 'results.json' }]
-    ['html']
+
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
