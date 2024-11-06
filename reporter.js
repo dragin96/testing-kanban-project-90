@@ -1,6 +1,6 @@
-const fs = require('node:fs').promises;
-const path = require('node:path');
-const axios = require('axios');
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import axios from 'axios';
 
 const BASE_URL = `${process.env.CI_SERVER_URL}/api/v4`;
 const GITLAB_TOKEN = process.env.GIT_API_TOKEN;
