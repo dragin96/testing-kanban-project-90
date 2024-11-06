@@ -31,6 +31,11 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
+      - uses: daun/playwright-report-summary@v3
+        if: always()
+        with:
+          report-file: results.json
+
       # Загружаем результаты тестов как артефакт
       - uses: actions/upload-artifact@v3
         if: ${{ !cancelled() }}

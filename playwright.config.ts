@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import {GitHubActionOptions} from "@estruyf/github-actions-reporter";
 
 /**
  * Read environment variables from file.
@@ -21,7 +22,12 @@ export default defineConfig({
   workers: process.env.CI ? 4 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    [process.env.CI ? 'github' : 'list'],
+    ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
+      title: 'E2E тесты',
+      useDetails: true,
+      showError: true
+    }],
+    ['json'],
     ['html']
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
