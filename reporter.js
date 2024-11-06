@@ -8,6 +8,7 @@ const projectId = process.env.CI_MERGE_REQUEST_PROJECT_ID;
 const mergeRequestId = process.env.CI_MERGE_REQUEST_IID;
 
 if (!BASE_URL || !GITLAB_TOKEN || !projectId || !mergeRequestId) {
+    console.log(BASE_URL, GITLAB_TOKEN, projectId, mergeRequestId);
     console.error('Переменные окружения для GitLab не установлены.');
     process.exit(1);
 }
