@@ -24,12 +24,13 @@ export default defineConfig({
   reporter: [
     ['json', { outputFile: 'results.json' }],
     ['html'],
-    ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
-      title: 'E2E тесты',
-      useDetails: true,
-      showError: true
-    }],
-
+    ['junit', { outputFile: 'results.xml' }],
+    // report for github
+    // ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
+    //   title: 'E2E тесты',
+    //   useDetails: true,
+    //   showError: true
+    // }],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
