@@ -27,7 +27,7 @@ export default defineConfig({
       useDetails: true,
       showError: true
     }],
-    ['json'],
+    ['json', { outputFile: 'results.json' }]
     ['html']
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
