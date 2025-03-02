@@ -1,4 +1,5 @@
 import {BaseComponent, SettingsComponents} from "../page/base/base.page";
+import {step} from "../helpers/allure";
 
 
 export class InputComponent extends BaseComponent {
@@ -6,6 +7,7 @@ export class InputComponent extends BaseComponent {
         super(settings);
     }
 
+    @step('Заполняем инпут значением $0')
     async fill(value: string) {
         await this.locator.fill(value);
     }

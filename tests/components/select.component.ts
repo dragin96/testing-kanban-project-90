@@ -1,9 +1,12 @@
 import {BaseComponent, SettingsComponents} from "../page/base/base.page";
+import {step} from "../helpers/allure";
 
 export class SelectComponent extends BaseComponent {
     constructor(settings: SettingsComponents) {
         super(settings);
     }
+
+    @step('Заполняем селект значением $0')
     async fill(values: string | string[]): Promise<void> {
         const getOptionsByText = (value: string) => this.locator
             .getByRole('option', { name: value })

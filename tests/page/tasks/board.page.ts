@@ -27,7 +27,10 @@ export class BoardPage extends BasePage {
     async assertCardByTitles(titles: string[]) {
         await expect(this.listCard).toHaveCount(titles.length);
         for (const title of titles) {
-            await expect(this.listCard.filter({hasText: title})).toBeVisible();
+            await expect(this.listCard).toContainText(title)
+            await expect(this.listCard.filter({hasText: title}), {
+                message: 'Проверка наличие созданной задачи с заголовком ' + title
+            }).toBeVisible();
         }
     }
 

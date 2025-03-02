@@ -3,6 +3,7 @@ import {expect, Page} from "@playwright/test";
 import {InputComponent} from "../../components/input.component";
 import {SelectComponent} from "../../components/select.component";
 import {NoticeMessagesComponent} from "../../components/noticeMessages.component";
+import {step} from "../../helpers/allure";
 
 export interface SettingsBaseForm {
     page: Page,
@@ -18,9 +19,10 @@ export class BaseFormPage extends BasePage {
     }
 
     messages = new NoticeMessagesComponent(this.page);
-    private saveBtn = this.page.getByRole('button', {name: 'Save'})
+    private saveBtn = this.page.getByRole('button', {name: 'Sve'})
     private deleteBtn = this.page.getByRole('button', {name: 'Delete'})
 
+    @step('Заполняем форму')
     async fillForm<T>(values: T) {
         for (const [keyForm, valueField] of Object.entries(values)) {
             await this.form[keyForm].fill(valueField as string);
@@ -37,6 +39,7 @@ export class BaseFormPage extends BasePage {
         await expect(this.saveBtn).toBeVisible();
     }
 
+    @step('Сохраняем форму')
     async save() {
         await this.saveBtn.click();
     }

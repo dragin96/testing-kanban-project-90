@@ -2,10 +2,10 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import axios from 'axios';
 
-const BASE_URL = `${process.env.CI_SERVER_URL}/api/v4`;
-const GITLAB_TOKEN = process.env.GIT_API_TOKEN;
-const projectId = process.env.CI_MERGE_REQUEST_PROJECT_ID;
-const mergeRequestId = process.env.CI_MERGE_REQUEST_IID;
+const BASE_URL = `https://gitlab.com/api/v4`;
+const GITLAB_TOKEN = 'glpat-UNntV1eU2Nao8JLcsMui';
+const projectId = '64269762';
+const mergeRequestId = '2';
 
 if (!BASE_URL || !GITLAB_TOKEN || !projectId || !mergeRequestId) {
     console.log(BASE_URL, GITLAB_TOKEN, projectId, mergeRequestId);
@@ -41,7 +41,7 @@ const parseJsonFile = async (filePath='results.json') => {
     }
 };
 
-const generateTestReport = (data) => {
+const generateTestReport = (data, stand="local") => {
     const stats = data.stats || {};
 
     const passedTests = stats.expected || 0;
