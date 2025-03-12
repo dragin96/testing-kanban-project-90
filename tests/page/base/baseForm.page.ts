@@ -1,5 +1,5 @@
 import {BasePage} from "./base.page";
-import {expect, Page} from "@playwright/test";
+import {expect, Page, test} from "@playwright/test";
 import {InputComponent} from "../../components/input.component";
 import {SelectComponent} from "../../components/select.component";
 import {NoticeMessagesComponent} from "../../components/noticeMessages.component";
@@ -23,7 +23,10 @@ export class BaseFormPage extends BasePage {
 
     async fillForm<T>(values: T) {
         for (const [keyForm, valueField] of Object.entries(values)) {
-            await this.form[keyForm].fill(valueField as string);
+            await test.step(`Заполняем ${keyForm} значением ${valueField}`,async () => {
+                await this.form[keyForm].fill(valueField as string);
+            })
+
         }
     }
 
@@ -38,7 +41,9 @@ export class BaseFormPage extends BasePage {
     }
 
     async save() {
-        await this.saveBtn.click();
+        await test.step('Кликаем на кнопку сохранить', async () => {
+            await this.saveBtn.click();
+        })
     }
 
     override async open(url: string) {

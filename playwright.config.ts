@@ -1,5 +1,4 @@
 import { defineConfig, devices } from '@playwright/test';
-import {GitHubActionOptions} from "@estruyf/github-actions-reporter";
 
 /**
  * Read environment variables from file.
@@ -22,9 +21,10 @@ export default defineConfig({
   workers: process.env.CI ? 4 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['json', { outputFile: 'results.json' }],
+    ['dot'],
     ['html'],
-    ['junit', { outputFile: 'results.xml' }],
+    ['./reporter-custom.ts'],
+    ['json', { outputFile: 'results.json' }],
     // report for github
     // ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
     //   title: 'E2E тесты',
@@ -38,7 +38,7 @@ export default defineConfig({
     baseURL: 'http://localhost:5173',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'on',
   },
   webServer: {
     command: 'npm run dev',

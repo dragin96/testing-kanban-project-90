@@ -16,6 +16,6 @@ export class NoticeMessagesComponent extends BaseComponent {
     }
 
     async expectMessages(title: NoticeMessages){
-        await expect(this.locator.getByText(title)).toBeVisible();
+        await expect(this.locator.getByText(title + '1234')).toBeVisible();
     }
 }
