@@ -18,16 +18,27 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 4 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['dot'],
+    ['html'],
+    ['./reporter-custom.ts'],
+    ['json', { outputFile: 'results.json' }],
+    // report for github
+    // ['@estruyf/github-actions-reporter', <GitHubActionOptions>{
+    //   title: 'E2E тесты',
+    //   useDetails: true,
+    //   showError: true
+    // }],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'http://localhost:5173',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'on',
   },
   webServer: {
     command: 'npm run dev',
@@ -38,7 +49,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'], headless: false },
+      use: { ...devices['Desktop Chrome'], headless: true },
     },
 
     // {

@@ -1,0 +1,69 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    # Список шагов для выполнения
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - uses: daun/playwright-report-summary@v3
+        if: always()
+        with:
+          report-file: results.json
+
+      # Загружаем результаты тестов как артефакт
+      - uses: actions/upload-artifact@v3
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+  preview:
+    needs: tests
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write         # gh-pages push
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: playwright-report
+          path: ./playwright-report
+      - name: Deploy to gh-pages/pr-N
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: report
+          target-folder: pr-${{ github.event.number }}   # ключ!
+          commit-message: Deploy report for PR ${{ github.event.number }}
+      - name: Comment link in PR
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            📰 **Playwright-report для этого MR:**  
+            https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/pr-${{ github.event.number }}/index.html

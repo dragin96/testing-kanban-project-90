@@ -19,10 +19,18 @@ test.describe('Tasks', async ()=> {
     test('Успешное создание новой задачи', async ({app: {formTasksPage}}) => {
         const formValue: Task = generateTasks();
 
-        await formTasksPage.fillForm<Task>(formValue);
-        await formTasksPage.save();
+        await test.step('Открываем форму создание', async () => {
+            await formTasksPage.open(urls.tasks.create);
+        })
 
-        await formTasksPage.messages.expectMessages(NoticeMessages.created);
+        await test.step('Заполняем и сохраняем форму на создание задачи', async () => {
+            await formTasksPage.fillForm<Task>(formValue);
+            await formTasksPage.save();
+        })
+
+        await test.step('Проверяем, что задача создалась', async () => {
+            await formTasksPage.messages.expectMessages(NoticeMessages.created);
+        })
     });
 });
 
@@ -44,13 +52,22 @@ test.describe('Редактирование и удаление задачи', a
         const newTaskTestData = generateTasks();
         const card = Cards.getCardByTitle(newTasks.title, page);
 
-        await card.edit();
-        await formTasksPage.checkAllForm();
-        await formTasksPage.fillForm<Task>(newTaskTestData);
-        await formTasksPage.save();
+        await test.step('Открыть задачу ' + newTasks.title + ' для редактирования', async () => {
+            await card.edit();
+        });
 
-        const cardUpdate = Cards.getCardByTitle(newTaskTestData.title, page);
-        await cardUpdate.expectVisible();
+        await test.step('Редактируем форму', async () => {
+            await formTasksPage.fillForm<Task>(newTaskTestData);
+        })
+
+        await test.step('Сохраняем форму', async () => {
+            await formTasksPage.save();
+        })
+
+        await test.step('Проверяем, что задачи отредактированы', async () => {
+            const cardUpdate = Cards.getCardByTitle(newTaskTestData.title + ' lol', page);
+            await cardUpdate.expectVisible();
+        })
     });
 
     test('Успешное удаление задачи', async ({page, app: {boardPage, taskPage}}) => {
